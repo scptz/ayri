@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>ayri</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+    #start {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      user-select: none;
+    }
+    #video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Startbildschirm -->
+  <div id="start">Click here</div>
+
+  <!-- Video -->
+  <video id="video">
+    <source src="video8844.mp4" type="video/mp4">
+  </video>
+
+  <script>
+    const start = document.getElementById("start");
+    const video = document.getElementById("video");
+
+    start.addEventListener("click", () => {
+      // Startbildschirm ausblenden
+      start.style.display = "none";
+      video.style.display = "block";
+
+      // Vollbild versuchen
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+        document.documentElement.msRequestFullscreen();
+      }
+
+      // Video abspielen mit Ton
+      video.play();
+    });
+
+    // Optional: Wenn Video zu Ende → Vollbild beenden
+    video.addEventListener("ended", () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    });
+  </script>
+
+</body>
+</html>
